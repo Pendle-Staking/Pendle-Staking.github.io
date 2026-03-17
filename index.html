@@ -1,0 +1,1189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- SEO / EEAT Meta Tags -->
+  <title>Pendle Staking — vePENDLE, PT/YT Yield Tokenization, APY/APR, Rewards &amp; Troubleshooting (2026)</title>
+  <meta name="description" content="Pendle staking guide (2026): how vePENDLE works, locking PENDLE for governance and fee sharing, PT and YT yield tokenization mechanics, fixed vs variable yield, gauge voting, boosted LP yields, APY vs APR, risks, and troubleshooting. Includes KPIs, runbook, and a deep FAQ.">
+  <meta name="author" content="Crypto Finance Experts">
+  <link rel="canonical" href="https://lido-pendle-staking.example.com/">
+
+  <link rel="icon" type="image/png" href="lido.staking.logo.png">
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://lido-pendle-staking.example.com/">
+  <meta property="og:title" content="Pendle Staking — vePENDLE, PT/YT Yield Tokenization, APY/APR, Rewards &amp; Troubleshooting (2026)">
+  <meta property="og:description" content="Practical Pendle guide: vePENDLE locking mechanics, PT/YT yield tokenization, fixed vs variable yield, gauge voting, boosted LP rewards, and troubleshooting.">
+  <meta property="og:image" content="cover.png">
+
+  <!-- Twitter Card -->
+  <meta property="twitter:card" content="summary_large_image">
+  <meta property="twitter:url" content="https://lido-pendle-staking.example.com/">
+  <meta property="twitter:title" content="Pendle Staking — vePENDLE, Yield Tokenization, APY/APR &amp; Rewards (2026)">
+  <meta property="twitter:description" content="How Pendle staking works: vePENDLE, PT/YT mechanics, fixed yield, gauge voting, and boosted LP rewards in 2025–2026.">
+  <meta property="twitter:image" content="cover.png">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": "Pendle Staking — vePENDLE, PT/YT Yield Tokenization, APY/APR, Rewards & Troubleshooting (2026)",
+    "description": "Comprehensive guide to Pendle staking: vePENDLE locking mechanics, PT/YT yield tokenization, fixed vs variable yield, gauge voting, boosted LP rewards, APY/APR, and troubleshooting.",
+    "author": { "@type": "Organization", "name": "Crypto Finance Experts" },
+    "publisher": { "@type": "Organization", "name": "Crypto Finance Experts" },
+    "datePublished": "2026-01-01",
+    "dateModified": "2026-03-01"
+  }
+  </script>
+
+  <style>
+    :root{
+      /* Deep Wine / Burgundy Theme */
+      --primary:#9F1239;
+      --primary-600:#881337;
+      --primary-700:#6F0F2E;
+      --accent:#FB7185;
+
+      --ink:#FFF1F2;
+      --muted:#A1A1AA;
+      --muted-2:#71717A;
+
+      --bg:#0A0206;
+      --panel:#150308;
+      --panel-2:#1C040B;
+      --line:rgba(255,255,255,.08);
+
+      --ok:#34D399;
+      --warn:#F59E0B;
+      --error:#F87171;
+
+      --shadow:0 12px 32px rgba(0,0,0,.60);
+      --radius:14px;
+      --radius-sm:10px;
+      --radius-lg:20px;
+      --gap:1.25rem;
+      --gap-lg:2rem;
+    }
+
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      font-family:system-ui,-apple-system,Segoe UI,Roboto,Inter,Arial,sans-serif;
+      color:var(--muted);
+      background:var(--bg);
+      line-height:1.65;
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
+    }
+
+    a{color:var(--accent);text-decoration:none}
+    a:hover{text-decoration:underline}
+    img{max-width:100%;height:auto;display:block}
+    .container{max-width:1100px;margin:0 auto;padding:0 1.25rem}
+
+    h1,h2,h3,h4{color:var(--ink);line-height:1.25;margin:0 0 .6rem}
+    h1{font-size:clamp(2rem,4.5vw,3.1rem);font-weight:800;letter-spacing:-.2px}
+    h2{font-size:clamp(1.35rem,2.8vw,2rem);margin-top:2.2rem;padding-top:.6rem;border-top:1px solid var(--line)}
+    h3{font-size:clamp(1.05rem,2.2vw,1.3rem);color:#FDA4AF}
+
+    p,li,td,th{font-size:1rem}
+    .lead{font-size:1.125rem;color:#FFE4E6}
+    .muted{color:var(--muted)}
+    .muted-2{color:var(--muted-2)}
+
+    header.hero{padding:clamp(2rem,6vw,4rem) 0;border-bottom:1px solid var(--line)}
+    .hero-grid{display:grid;gap:var(--gap-lg);grid-template-columns:1fr;align-items:stretch}
+    .hero-card{
+      background:var(--panel);border:1px solid var(--line);
+      border-radius:var(--radius-lg);padding:clamp(1rem,3vw,1.75rem);box-shadow:var(--shadow);
+    }
+
+    .brand-row{display:flex;align-items:center;gap:.9rem;margin-bottom:.75rem}
+    .brand-logo{
+      width:54px;height:54px;border-radius:14px;border:1px solid var(--line);
+      background:rgba(159,18,57,.08);padding:.35rem;object-fit:contain;
+      box-shadow:0 6px 16px rgba(0,0,0,.35);flex:0 0 auto;
+    }
+
+    .cta{
+      display:inline-flex;align-items:center;gap:.5rem;
+      background:var(--primary);color:#fff;padding:1rem 2.5rem;border-radius:12px;
+      font-weight:800;font-size:1.05rem;letter-spacing:.2px;
+      box-shadow:0 10px 28px rgba(159,18,57,.35);border:1px solid rgba(255,255,255,.10);
+      transition:background .18s,transform .18s,box-shadow .18s;
+    }
+    .cta:hover{background:var(--primary-600);transform:translateY(-2px);box-shadow:0 16px 36px rgba(159,18,57,.48);text-decoration:none}
+
+    .note{
+      border-left:2px solid var(--accent);padding:.75rem 1rem;
+      background:rgba(251,113,133,.06);border-radius:0 10px 10px 0;color:#FFE4E6;
+    }
+
+    section.step-guide{padding:clamp(2rem,6vw,3.5rem) 0}
+    .steps{display:grid;gap:var(--gap);grid-template-columns:1fr}
+    .step{
+      background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);
+      padding:1.2rem;box-shadow:0 8px 20px rgba(0,0,0,.40);
+      transition:transform .2s ease,border-color .2s ease;
+    }
+    .step:hover{transform:translateY(-3px);border-color:rgba(251,113,133,.28)}
+    .step .icon{
+      width:48px;height:48px;border-radius:10px;display:inline-grid;place-items:center;
+      background:rgba(159,18,57,.14);margin-bottom:.6rem;color:#FDA4AF;
+      font-weight:900;border:1px solid rgba(251,113,133,.20);
+    }
+
+    main .card{
+      background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);
+      padding:1.25rem;margin:1.25rem 0;box-shadow:0 8px 20px rgba(0,0,0,.40);
+    }
+
+    .grid-2{display:grid;gap:var(--gap);grid-template-columns:1fr}
+    .pillbar{display:flex;flex-wrap:wrap;gap:.6rem;margin:.75rem 0 0}
+    .pill{border:1px solid var(--line);background:rgba(159,18,57,.08);padding:.4rem .65rem;border-radius:999px;font-weight:700;color:#FDA4AF}
+
+    .toc{border:1px solid var(--line);background:rgba(159,18,57,.04);border-radius:var(--radius);padding:1rem}
+    .toc strong{color:var(--ink)}
+    .toc ul{margin:.5rem 0 0;padding-left:1.1rem}
+    .toc li{margin:.25rem 0}
+    .toc a{font-weight:700;color:var(--accent)}
+
+    table{width:100%;border-collapse:collapse;overflow:hidden;border-radius:12px}
+    th,td{padding:.9rem;border-bottom:1px solid var(--line)}
+    th{background:rgba(159,18,57,.10);color:var(--ink);text-align:left}
+    tr.highlight{background:rgba(159,18,57,.06)}
+    tr:hover{background:rgba(255,255,255,.02)}
+
+    .ok{color:var(--ok)}.warn{color:var(--warn)}.err{color:var(--error)}
+
+    .eeat{
+      background:rgba(159,18,57,.04);border:1px solid var(--line);
+      border-radius:var(--radius);padding:1.25rem;box-shadow:0 8px 20px rgba(0,0,0,.40);
+    }
+
+    .faq-item{border-bottom:1px solid var(--line);padding:.9rem 0}
+    .faq-button{all:unset;display:flex;justify-content:space-between;align-items:center;width:100%;cursor:pointer;padding:.3rem 0}
+    .faq-button:focus-visible{outline:2px solid var(--accent)}
+    .faq-button h3{margin:0;font-weight:800}
+    .faq-content{max-height:0;overflow:hidden;transition:max-height .25s ease}
+    .faq-content.open{padding-top:.6rem}
+    .faq-plus{font-weight:900;color:var(--accent);font-size:1.2rem}
+
+    .cta-center{display:flex;justify-content:center;margin-top:1.25rem}
+
+    .badge-row{display:flex;flex-wrap:wrap;gap:.6rem;margin:.9rem 0 0}
+    .badge{border:1px solid rgba(251,113,133,.20);background:rgba(251,113,133,.06);padding:.35rem .6rem;border-radius:999px;font-weight:800;color:#FDA4AF}
+
+    .callout-grid{display:grid;gap:var(--gap);grid-template-columns:1fr;margin-top:.75rem}
+    .mini{background:rgba(255,255,255,.025);border:1px solid var(--line);border-radius:var(--radius);padding:1rem}
+    .mini h3{margin-bottom:.35rem}
+    .kpi-badges{display:flex;flex-wrap:wrap;gap:.55rem;margin-top:.5rem}
+    .kpi-badges span{
+      border:1px solid rgba(159,18,57,.24);background:rgba(159,18,57,.10);
+      color:#FDA4AF;padding:.3rem .55rem;border-radius:999px;font-weight:800;font-size:.9rem;
+    }
+
+    .src{
+      display:inline-flex;align-items:center;gap:.2rem;font-size:.78rem;font-weight:700;
+      color:var(--accent);border:1px solid rgba(251,113,133,.24);background:rgba(159,18,57,.08);
+      border-radius:5px;padding:.1rem .4rem;vertical-align:middle;white-space:nowrap;
+    }
+    .src:hover{background:rgba(251,113,133,.16);text-decoration:none}
+    .src::before{content:'↗ ';font-size:.7rem;opacity:.7}
+
+    /* PT/YT split diagram */
+    .split-diagram{
+      display:flex;align-items:center;justify-content:center;
+      flex-wrap:wrap;gap:.75rem;margin:1rem 0;
+    }
+    .split-source{
+      background:rgba(159,18,57,.14);border:1px solid rgba(251,113,133,.25);
+      border-radius:12px;padding:.85rem 1.25rem;font-size:.9rem;font-weight:700;
+      color:#FFE4E6;text-align:center;min-width:120px;
+    }
+    .split-arrow{color:var(--accent);font-size:1.3rem;font-weight:900}
+    .split-pt{
+      background:rgba(52,211,153,.10);border:1px solid rgba(52,211,153,.22);
+      border-radius:12px;padding:.85rem 1.25rem;font-size:.9rem;font-weight:700;
+      color:#A7F3D0;text-align:center;min-width:130px;
+    }
+    .split-yt{
+      background:rgba(251,191,36,.10);border:1px solid rgba(251,191,36,.22);
+      border-radius:12px;padding:.85rem 1.25rem;font-size:.9rem;font-weight:700;
+      color:#FEF3C7;text-align:center;min-width:130px;
+    }
+    .split-both{display:flex;flex-direction:column;gap:.5rem}
+
+    /* vePENDLE lock duration bars */
+    .lock-bars{display:grid;gap:.5rem;margin:.75rem 0}
+    .lock-row{display:flex;align-items:center;gap:.75rem}
+    .lock-lbl{min-width:110px;font-size:.85rem;font-weight:700;color:#FDA4AF}
+    .lock-track{flex:1;height:5px;background:rgba(255,255,255,.06);border-radius:99px;overflow:hidden}
+    .lock-fill{height:100%;border-radius:99px;background:linear-gradient(90deg,var(--primary),var(--accent))}
+    .lock-val{min-width:80px;text-align:right;font-size:.82rem;font-weight:800;color:var(--accent)}
+
+    /* yield type indicator */
+    .yield-badge{
+      display:inline-flex;align-items:center;gap:.3rem;
+      padding:.3rem .7rem;border-radius:999px;font-size:.82rem;font-weight:800;
+    }
+    .yield-fixed{background:rgba(52,211,153,.12);border:1px solid rgba(52,211,153,.25);color:#6EE7B7}
+    .yield-variable{background:rgba(251,191,36,.10);border:1px solid rgba(251,191,36,.22);color:#FCD34D}
+
+    @media(min-width:860px){
+      .steps{grid-template-columns:repeat(4,1fr)}
+      .grid-2{grid-template-columns:1fr 1fr}
+      .callout-grid{grid-template-columns:1fr 1fr}
+    }
+  </style>
+</head>
+
+<body>
+
+<header class="hero" role="banner">
+  <div class="container hero-grid">
+    <div class="hero-card" aria-label="Intro">
+      <div class="brand-row">
+        <img class="brand-logo" src="lido.staking.logo.png" alt="Lido Staking logo">
+        <div>
+          <div class="muted" style="font-weight:800;letter-spacing:.2px;">Operational Guide</div>
+          <div class="muted-2" style="font-size:.95rem;">vePENDLE Locking&nbsp;•&nbsp;PT/YT Tokenization&nbsp;•&nbsp;Fixed Yield&nbsp;•&nbsp;Gauge Voting&nbsp;•&nbsp;Boosted LP</div>
+        </div>
+      </div>
+
+      <h1>Pendle Staking</h1>
+      <p class="lead">
+        A practical guide to Pendle's yield ecosystem: how locking PENDLE for vePENDLE
+        earns protocol fees and governance rights, how the PT/YT tokenization mechanism
+        creates fixed and variable yield positions from any yield-bearing asset,
+        how gauge voting boosts LP rewards, and how to compare <strong>APY vs APR</strong>
+        across Pendle's distinct yield instruments.
+      </p>
+
+      <div class="cta-center">
+        <a href="https://lido-staking.net/" class="cta" target="_blank" rel="noopener" aria-label="Explore staking options with Lido">
+          Explore Staking Options &nbsp;→
+        </a>
+      </div>
+
+      <div class="note" style="margin-top:1.25rem;">
+        <strong>Core distinction:</strong> Pendle is a yield marketplace, not a proof-of-stake network.
+        "Pendle staking" refers specifically to locking PENDLE tokens for vePENDLE — which earns a share
+        of Pendle's protocol fees and governance voting power over yield markets.
+        This is fundamentally different from PoS validator staking — it is DeFi fee-sharing,
+        similar conceptually to Curve's veCRV model.
+      </div>
+    </div>
+  </div>
+</header>
+
+<section class="step-guide" aria-labelledby="how-works">
+  <div class="container">
+    <h2 id="how-works">Pendle's Four Participation Modes: Lock → Split → Provide → Vote</h2>
+    <div class="steps" role="list">
+      <article class="step" role="listitem">
+        <div class="icon">①</div>
+        <h3>Lock PENDLE → vePENDLE</h3>
+        <p>
+          Lock PENDLE tokens for up to 2 years to receive vePENDLE — a non-transferable,
+          vote-escrow position. vePENDLE decays linearly over the lock period and earns
+          a share of Pendle's protocol fees plus boosted LP rewards.
+        </p>
+      </article>
+      <article class="step" role="listitem">
+        <div class="icon">②</div>
+        <h3>Split yield assets → PT + YT</h3>
+        <p>
+          Deposit a yield-bearing asset (stETH, USDC in Aave, GLP, etc.) and Pendle splits
+          it into a Principal Token (PT — fixed yield) and Yield Token (YT — variable yield).
+          Trade or hold either component depending on your yield outlook.
+        </p>
+      </article>
+      <article class="step" role="listitem">
+        <div class="icon">③</div>
+        <h3>Provide liquidity to Pendle AMM</h3>
+        <p>
+          Pendle's specialised AMM prices PT and YT. LPs provide liquidity to these pools
+          and earn trading fees plus PENDLE incentives. vePENDLE holders receive a
+          proportional boost on their LP returns.
+        </p>
+      </article>
+      <article class="step" role="listitem">
+        <div class="icon">④</div>
+        <h3>Vote gauges → direct PENDLE emissions</h3>
+        <p>
+          vePENDLE holders vote weekly on which pools receive PENDLE liquidity incentives.
+          This gauge system — similar to Curve's — creates protocol revenue from bribe markets
+          where pools compete for vePENDLE votes.
+        </p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<main class="container" role="main">
+
+  <section class="card toc" aria-label="Table of Contents">
+    <strong>On this page (Pendle Staking):</strong>
+    <ul>
+      <li><a href="#overview">Overview — Pendle as a yield marketplace and veCRV-style model</a></li>
+      <li><a href="#pt-yt">PT and YT: how yield tokenization works</a></li>
+      <li><a href="#vependle">vePENDLE: locking mechanics, decay, and fee distribution</a></li>
+      <li><a href="#rewards">Rewards: what vePENDLE earns and where it comes from</a></li>
+      <li><a href="#apy-apr">APY / APR: how to compare across Pendle positions</a></li>
+      <li><a href="#how-to">How to lock PENDLE: step-by-step tutorial</a></li>
+      <li><a href="#calculator">Calculator: vePENDLE yield estimation framework</a></li>
+      <li><a href="#gauge-voting">Gauge voting: directing emissions and earning bribes</a></li>
+      <li><a href="#lp-boosting">LP boosting: how vePENDLE multiplies liquidity rewards</a></li>
+      <li><a href="#review">Review: legit, trust signals, and what to watch</a></li>
+      <li><a href="#safety">Risks: lock-up, smart contract, and market risks</a></li>
+      <li><a href="#comparison">Comparison: vePENDLE vs PT vs YT vs LP strategies</a></li>
+      <li><a href="#best-practices">Best practices: high-impact rules</a></li>
+      <li><a href="#troubleshooting">Troubleshooting and common issues</a></li>
+      <li><a href="#eeat">Sources and references</a></li>
+      <li><a href="#faq">FAQ</a></li>
+    </ul>
+  </section>
+
+  <section class="card" id="overview">
+    <h2>Overview: Pendle as a Yield Marketplace and the veCRV Model</h2>
+    <p>
+      Pendle Finance is a DeFi protocol that turns any yield-bearing asset into tradeable,
+      fixed-maturity financial instruments — creating an on-chain interest rate market.
+      It operates on Ethereum, Arbitrum, BNB Chain, Optimism, and Mantle.
+      Pendle's governance and fee model is based on vote-escrow tokenomics (vePENDLE),
+      similar to Curve Finance's veCRV. Official documentation at
+      <a href="https://docs.pendle.finance/" target="_blank" rel="noopener nofollow" class="src">docs.pendle.finance</a>.
+    </p>
+
+    <div class="pillbar" aria-label="Key topics">
+      <span class="pill">vePENDLE</span>
+      <span class="pill">PT Fixed Yield</span>
+      <span class="pill">YT Variable Yield</span>
+      <span class="pill">Gauge Voting</span>
+      <span class="pill">LP Boosting</span>
+      <span class="pill">Bribe Markets</span>
+    </div>
+
+    <div class="callout-grid" role="list">
+      <div class="mini" role="listitem">
+        <h3>What Pendle enables that standard staking doesn't</h3>
+        <p class="muted">
+          Standard PoS staking earns whatever variable yield the protocol produces.
+          Pendle allows you to lock in a <strong>fixed yield</strong> today on any yield-bearing asset
+          (by buying PT), or speculate on yield going higher (by buying YT).
+          This is the first on-chain fixed income market for DeFi yields —
+          a capability that does not exist in PoS staking, liquid staking, or lending protocols.
+        </p>
+        <div class="kpi-badges">
+          <span>Fixed income on-chain</span><span>Yield speculation</span><span>Interest rate market</span>
+        </div>
+      </div>
+      <div class="mini" role="listitem">
+        <h3>Why vePENDLE is analogous to veCRV</h3>
+        <p class="muted">
+          Like Curve's veCRV model, vePENDLE is non-transferable, decays linearly toward zero
+          at lock expiry, earns protocol fee revenue, and controls emissions distribution via gauge votes.
+          The key difference: Pendle accrues fees from an interest rate market (yield trading),
+          not just a stablecoin AMM. The veCRV precedent is documented at
+          <a href="https://curve.fi/" target="_blank" rel="noopener nofollow" class="src">curve.fi</a>
+          for comparison.
+        </p>
+        <div class="kpi-badges">
+          <span>Non-transferable</span><span>Linear decay</span><span>Fee sharing</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="note" style="margin-top:1rem;">
+      <strong>What this guide covers:</strong> This guide focuses on the "staking" dimension of Pendle —
+      specifically locking PENDLE for vePENDLE and its rewards. It also covers the broader PT/YT
+      yield tokenization context that makes vePENDLE valuable — because the protocol fee revenue
+      that vePENDLE earns depends entirely on how much yield trading volume Pendle generates.
+    </div>
+  </section>
+
+  <section class="card" id="pt-yt">
+    <h2>PT and YT: How Yield Tokenization Works</h2>
+    <p>
+      Pendle's core mechanism splits a yield-bearing asset into two components with different
+      financial profiles. Understanding this split is essential for understanding what vePENDLE
+      earns fees from. Full mechanics at
+      <a href="https://docs.pendle.finance/Introduction/YieldTokenization" target="_blank" rel="noopener nofollow" class="src">docs.pendle.finance — Yield Tokenization</a>.
+    </p>
+
+    <!-- PT/YT split visual -->
+    <div class="split-diagram" aria-label="PT/YT yield tokenization split">
+      <div class="split-source">
+        Yield-Bearing Asset<br>
+        <small style="font-weight:400;color:var(--muted)">e.g. stETH, aUSDC, GLP</small>
+      </div>
+      <span class="split-arrow">→</span>
+      <div class="split-both">
+        <div class="split-pt">
+          <strong>PT</strong> — Principal Token<br>
+          <small style="font-weight:400">Redeems for 1 underlying at maturity</small><br>
+          <span class="yield-badge yield-fixed" style="margin-top:.3rem;display:inline-flex">Fixed Yield</span>
+        </div>
+        <div class="split-yt">
+          <strong>YT</strong> — Yield Token<br>
+          <small style="font-weight:400">Receives all yield accrued until maturity</small><br>
+          <span class="yield-badge yield-variable" style="margin-top:.3rem;display:inline-flex">Variable Yield</span>
+        </div>
+      </div>
+    </div>
+
+    <h3 style="margin-top:1rem;">PT — Principal Token: how fixed yield works</h3>
+    <p>
+      PT is a zero-coupon bond equivalent. It trades at a discount to the underlying asset
+      before maturity — for example, PT-stETH (expiry June 2026) might trade at 0.96 stETH.
+      If you buy it at 0.96 stETH and hold to maturity, you receive 1 stETH — capturing the
+      0.04 stETH difference as <strong>guaranteed, fixed yield</strong>.
+      Your fixed APY is determined at the time of purchase, not at maturity.
+    </p>
+
+    <h3>YT — Yield Token: how variable yield speculation works</h3>
+    <p>
+      YT receives all the yield generated by the underlying asset from purchase until maturity.
+      If you hold YT-stETH, you receive all of the stETH staking rewards from the corresponding
+      principal during the maturity period. YT has high leverage to yield rate changes —
+      if stETH APR doubles, YT holders benefit significantly; if APR drops, YT loses value rapidly.
+      YT decays to zero at maturity (it has no principal component).
+    </p>
+
+    <div class="callout-grid">
+      <div class="mini">
+        <h3>When to use PT (buy fixed yield)</h3>
+        <p class="muted">You expect yields to fall — locking in today's implied yield before it decreases. Or you want predictable, fixed returns on a stablecoin or staked ETH position regardless of future rate movements. PT is the "interest rate bear" position.</p>
+        <div class="kpi-badges"><span>Yield will fall</span><span>Want certainty</span><span>Zero-coupon bond equivalent</span></div>
+      </div>
+      <div class="mini">
+        <h3>When to use YT (buy variable yield exposure)</h3>
+        <p class="muted">You expect yields to rise significantly — and want amplified exposure to that increase. YT is high-risk/high-reward: it can generate 3–10× the yield of simply holding the underlying asset if rates spike. However it decays to zero at maturity regardless of price — losing 100% is the outcome if rates don't move in your favour.</p>
+        <div class="kpi-badges"><span>Yield will rise</span><span>Amplified yield</span><span>Can lose 100%</span></div>
+      </div>
+    </div>
+
+    <div class="note">
+      <strong>Why PT/YT volume matters for vePENDLE:</strong> Every PT/YT split, trade on Pendle's AMM,
+      and LP interaction generates protocol fees. vePENDLE holders earn a share of these fees.
+      The larger Pendle's total value locked and trading volume, the more vePENDLE earns.
+      PT/YT mechanics are the engine that generates vePENDLE income.
+    </div>
+  </section>
+
+  <section class="card" id="vependle">
+    <h2>vePENDLE: Locking Mechanics, Linear Decay, and Fee Distribution</h2>
+    <p>
+      vePENDLE is earned by locking PENDLE tokens for a duration between 1 week and 2 years.
+      The vePENDLE amount received is proportional to both the PENDLE locked and the duration chosen.
+      Mechanics are specified at
+      <a href="https://docs.pendle.finance/ProtocolMechanics/vePENDLE" target="_blank" rel="noopener nofollow" class="src">docs.pendle.finance — vePENDLE</a>.
+    </p>
+
+    <div class="grid-2">
+      <div class="mini">
+        <h3>vePENDLE amount formula</h3>
+        <p class="muted">
+          <strong>vePENDLE = PENDLE locked × (remaining lock time / max lock time)</strong><br><br>
+          Example: locking 1,000 PENDLE for 2 years (the maximum) gives 1,000 vePENDLE.
+          Locking the same 1,000 PENDLE for 1 year gives 500 vePENDLE.
+          At lock expiry, vePENDLE reaches zero — your underlying PENDLE is returned.
+        </p>
+        <div class="kpi-badges"><span>Max lock = max vePENDLE</span><span>Linear decay</span><span>PENDLE returned at expiry</span></div>
+      </div>
+      <div class="mini">
+        <h3>vePENDLE decay — practical implications</h3>
+        <p class="muted">
+          Because vePENDLE decays linearly, your voting power and fee-earning share decrease
+          continuously unless you extend your lock. Many vePENDLE holders extend their lock
+          periodically to maintain maximum voting power. You can add more PENDLE or extend
+          the lock duration at any time — but cannot reduce or exit early.
+        </p>
+        <div class="kpi-badges"><span>Continuous decay</span><span>Extend to maintain power</span><span>No early exit</span></div>
+      </div>
+    </div>
+
+    <!-- Lock duration visual -->
+    <h3 style="margin-top:1rem;">vePENDLE received for 1,000 PENDLE at different lock durations</h3>
+    <div class="lock-bars" aria-label="vePENDLE by lock duration">
+      <div class="lock-row">
+        <span class="lock-lbl">2 years (max)</span>
+        <div class="lock-track"><div class="lock-fill" style="width:100%"></div></div>
+        <span class="lock-val">1,000 vePENDLE</span>
+      </div>
+      <div class="lock-row">
+        <span class="lock-lbl">18 months</span>
+        <div class="lock-track"><div class="lock-fill" style="width:75%"></div></div>
+        <span class="lock-val">750 vePENDLE</span>
+      </div>
+      <div class="lock-row">
+        <span class="lock-lbl">12 months</span>
+        <div class="lock-track"><div class="lock-fill" style="width:50%"></div></div>
+        <span class="lock-val">500 vePENDLE</span>
+      </div>
+      <div class="lock-row">
+        <span class="lock-lbl">6 months</span>
+        <div class="lock-track"><div class="lock-fill" style="width:25%"></div></div>
+        <span class="lock-val">250 vePENDLE</span>
+      </div>
+      <div class="lock-row">
+        <span class="lock-lbl">1 month</span>
+        <div class="lock-track"><div class="lock-fill" style="width:4%"></div></div>
+        <span class="lock-val">~42 vePENDLE</span>
+      </div>
+    </div>
+
+    <div class="note">
+      <strong>Lock strategy trade-off:</strong> Longer lock = more vePENDLE = more fees and voting power.
+      But locking for 2 years means your PENDLE is completely illiquid for that duration —
+      no partial exits, no early withdrawals.
+      Calibrate lock duration based on your conviction in Pendle's long-term growth
+      and your actual liquidity requirements over the lock period.
+    </div>
+  </section>
+
+  <section class="card" id="rewards">
+    <h2>Rewards: What vePENDLE Earns and Where It Comes From</h2>
+    <p>
+      vePENDLE earns from three distinct sources. Real-time revenue data is available at
+      <a href="https://app.pendle.finance/vependle" target="_blank" rel="noopener nofollow" class="src">app.pendle.finance/vependle</a>
+      and independently tracked by
+      <a href="https://pendle.magpiexyz.io/" target="_blank" rel="noopener nofollow" class="src">Pendle Magpie</a>.
+    </p>
+    <ul>
+      <li><strong>Protocol fee share (80% of Pendle's swap fees):</strong> every trade on Pendle's AMM incurs a swap fee. 80% of these fees flow to vePENDLE holders proportional to their vePENDLE balance. This is the primary, most reliable source of income for vePENDLE.</li>
+      <li><strong>Interest from expired YT positions:</strong> when YT expires, any unclaimed yield accrued in the YT position is distributed to vePENDLE holders. This represents residual yield that YT holders did not claim before maturity.</li>
+      <li><strong>Gauge voting incentives (bribes):</strong> protocols and projects that want PENDLE emissions directed to their pool offer incentives ("bribes") to vePENDLE holders in exchange for gauge votes. Bribe income is variable and depends on competition for emissions each epoch.</li>
+    </ul>
+
+    <div class="callout-grid">
+      <div class="mini">
+        <h3>Protocol fee revenue drivers</h3>
+        <p class="muted">
+          Pendle's swap fee revenue depends on: total trading volume across all PT/YT pools,
+          number of active markets, and the fee rate set by governance (currently 3% of swap fees
+          go to the treasury, 80% to vePENDLE, 17% to LPs).
+          Growing TVL and trading volume directly increase vePENDLE income.
+        </p>
+        <div class="kpi-badges"><span>80% of swap fees</span><span>TVL dependent</span><span>Paid in various tokens</span></div>
+      </div>
+      <div class="mini">
+        <h3>Bribe market dynamics</h3>
+        <p class="muted">
+          The bribe market for vePENDLE votes has grown significantly as protocols discover
+          that directing PENDLE emissions to their pool is more capital-efficient than
+          providing liquidity themselves. Bribe income is usually paid in the pool's native token.
+          Track current bribe offers at
+          <a href="https://votemarket.pastis.finance/" target="_blank" rel="noopener nofollow" class="src">Votemarket</a>
+          and
+          <a href="https://hiddenhand.finance/pendle" target="_blank" rel="noopener nofollow" class="src">Hidden Hand / Pendle</a>.
+        </p>
+        <div class="kpi-badges"><span>Protocol-driven</span><span>Paid in pool tokens</span><span>Weekly epochs</span></div>
+      </div>
+    </div>
+
+    <div class="note">
+      <strong>Revenue composition matters:</strong> Pendle's protocol fee revenue is paid in multiple
+      tokens (stETH, USDC, PENDLE, and whatever assets are in active pools) — not just PENDLE.
+      This multi-asset distribution creates complexity for yield calculation but also diversifies
+      income sources beyond a single token's performance.
+    </div>
+  </section>
+
+  <section class="card" id="apy-apr">
+    <h2>APY / APR: How to Compare Across Pendle's Yield Positions</h2>
+    <p>
+      Pendle has multiple yield-generating positions (PT, YT, LP, vePENDLE) each with a
+      fundamentally different APY calculation. Conflating these is a common source of confusion.
+    </p>
+
+    <table aria-label="Pendle yield types comparison">
+      <thead>
+        <tr><th>Position</th><th>Yield type</th><th>How APY is quoted</th><th>Key risk</th></tr>
+      </thead>
+      <tbody>
+        <tr class="highlight">
+          <td><strong>PT (Principal Token)</strong></td>
+          <td><span class="yield-badge yield-fixed">Fixed</span></td>
+          <td>Fixed APY determined at purchase; guaranteed if held to maturity</td>
+          <td>Opportunity cost if rates rise; underlying asset risk</td>
+        </tr>
+        <tr>
+          <td><strong>YT (Yield Token)</strong></td>
+          <td><span class="yield-badge yield-variable">Variable</span></td>
+          <td>Displayed APY is the current underlying yield annualised — not guaranteed</td>
+          <td>YT decays to zero at maturity; yield must significantly exceed purchase price to profit</td>
+        </tr>
+        <tr class="highlight">
+          <td><strong>LP (AMM liquidity)</strong></td>
+          <td><span class="yield-badge yield-variable">Variable</span></td>
+          <td>Swap fees + PENDLE incentives; boosted by vePENDLE</td>
+          <td>Impermanent loss in the PT/underlying price relationship; smart contract risk</td>
+        </tr>
+        <tr>
+          <td><strong>vePENDLE</strong></td>
+          <td><span class="yield-badge yield-variable">Variable</span></td>
+          <td>Protocol fees + bribe income; quoted as estimated APY on app.pendle.finance</td>
+          <td>PENDLE fully locked; income varies with trading volume and bribe competition</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="note">
+      <strong>The most important APY distinction in Pendle:</strong> PT's fixed APY is the only
+      truly guaranteed number — it is locked in at purchase and redeemable at maturity regardless
+      of what happens to yields in between. Every other APY figure in Pendle is a variable estimate
+      that will change with market conditions.
+    </div>
+  </section>
+
+  <section class="card" id="how-to">
+    <h2>How to Lock PENDLE for vePENDLE: Step-by-Step Tutorial</h2>
+    <ol>
+      <li><strong>Acquire PENDLE tokens:</strong> PENDLE is available on Uniswap, SushiSwap, and major CEXs. For the Ethereum mainnet vePENDLE position, you will need PENDLE on Ethereum. For Arbitrum, acquire PENDLE on Arbitrum (bridged or directly on-chain via a DEX).</li>
+      <li><strong>Navigate to the official vePENDLE interface:</strong> visit
+        <a href="https://app.pendle.finance/vependle" target="_blank" rel="noopener nofollow" class="src">app.pendle.finance/vependle</a>
+        — always verify the URL before connecting a wallet. Pendle phishing clones are active.</li>
+      <li><strong>Review current protocol revenue data:</strong> before locking, check the estimated vePENDLE APY displayed on the dashboard. This reflects recent protocol fee revenue and bribe income — it gives you a realistic baseline expectation.</li>
+      <li><strong>Choose your lock duration:</strong> longer lock = more vePENDLE = more fees and voting power but longer illiquidity. Model whether you will need PENDLE liquidity within your chosen lock period — early exit is impossible.</li>
+      <li><strong>Approve the PENDLE token:</strong> set an exact approval amount (not unlimited) before the locking transaction.</li>
+      <li><strong>Confirm the lock transaction:</strong> verify the vePENDLE amount you will receive and the exact unlock date before signing.</li>
+      <li><strong>Claim rewards and vote regularly:</strong> vePENDLE rewards require periodic claiming. Gauge votes reset each epoch (weekly) — if you want to earn bribe income, you must vote each epoch through the official interface or a meta-governance platform like
+        <a href="https://pendle.magpiexyz.io/" target="_blank" rel="noopener nofollow" class="src">Pendle Magpie</a>.</li>
+    </ol>
+
+    <div class="note">
+      <strong>Key principle:</strong> vePENDLE is a long-term commitment. Before locking any PENDLE,
+      be confident you understand the lock mechanics, cannot access the PENDLE until unlock,
+      and have evaluated the expected yield against the opportunity cost of illiquidity.
+      There is no emergency exit. Audit reports for Pendle's core contracts are available at
+      <a href="https://github.com/pendle-finance/pendle-core-v2-public/tree/main/audits" target="_blank" rel="noopener nofollow" class="src">Pendle GitHub audits</a>.
+    </div>
+  </section>
+
+  <section class="card" id="calculator">
+    <h2>Calculator: vePENDLE Yield Estimation Framework</h2>
+    <p>
+      vePENDLE yield estimation is more complex than PoS staking because income comes from
+      multiple variable sources denominated in multiple tokens. Use current data from
+      <a href="https://app.pendle.finance/vependle" target="_blank" rel="noopener nofollow" class="src">app.pendle.finance</a>
+      as inputs — do not rely on historical figures for a DeFi protocol with variable fee revenue.
+    </p>
+
+    <table aria-label="vePENDLE yield calculator inputs">
+      <thead>
+        <tr><th>Input</th><th>Meaning</th><th>Practical note</th></tr>
+      </thead>
+      <tbody>
+        <tr class="highlight">
+          <td>PENDLE locked amount</td>
+          <td>Your principal — cannot be accessed until lock expiry</td>
+          <td>More PENDLE = more vePENDLE = higher fee share; but same lock illiquidity risk</td>
+        </tr>
+        <tr>
+          <td>Lock duration</td>
+          <td>1 week to 2 years</td>
+          <td>Directly proportional to vePENDLE received; 2 years gives maximum return per PENDLE</td>
+        </tr>
+        <tr class="highlight">
+          <td>Protocol fee revenue (trailing 30d)</td>
+          <td>Total fees distributed to all vePENDLE holders over 30 days</td>
+          <td>Available on Pendle dashboard; highly correlated with trading volume — varies significantly</td>
+        </tr>
+        <tr>
+          <td>Total vePENDLE supply</td>
+          <td>Your share = your vePENDLE / total vePENDLE outstanding</td>
+          <td>As more PENDLE is locked, your fee share dilutes — monitor total supply on app.pendle.finance</td>
+        </tr>
+        <tr class="highlight">
+          <td>Bribe income</td>
+          <td>Expected weekly bribe per vePENDLE if you vote actively</td>
+          <td>Check current bribe offers weekly on Votemarket or Hidden Hand; not guaranteed or consistent</td>
+        </tr>
+        <tr>
+          <td>PENDLE USD price assumption</td>
+          <td>Expected PENDLE price over lock period</td>
+          <td>Your locked PENDLE's USD value fluctuates — the fee APY is nominal in fee tokens, not USD-fixed</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="callout-grid">
+      <div class="mini">
+        <h3>Example: 1,000 PENDLE locked 2 years</h3>
+        <p class="muted">Receive 1,000 vePENDLE. If total vePENDLE is 50M and annual protocol fees = $20M: your annual share ≈ 1,000/50,000,000 × $20,000,000 = $400. Plus bribe income if you vote. At $1.50 PENDLE: $1,500 locked, ~26% APY in protocol fees. Variable — depends entirely on Pendle's fee revenue.</p>
+      </div>
+      <div class="mini">
+        <h3>Example: 1,000 PENDLE locked 6 months</h3>
+        <p class="muted">Receive 250 vePENDLE (25% of max). Same proportional fee share, but 4× lower than 2-year lock. APY from fees: ~6.5% (at same protocol revenue). But PENDLE is only illiquid for 6 months — useful if you want a shorter commitment at the cost of lower yield.</p>
+      </div>
+    </div>
+
+    <div class="note">
+      <strong>Most important variable:</strong> Pendle's protocol fee revenue is the primary driver
+      of vePENDLE yield — and it is highly correlated with total TVL and trading volume.
+      During DeFi bull markets, Pendle's TVL and fee revenue increase significantly.
+      During bear markets, both can contract substantially. Model both scenarios before locking.
+    </div>
+  </section>
+
+  <section class="card" id="gauge-voting">
+    <h2>Gauge Voting: Directing Emissions and Earning Bribe Income</h2>
+    <p>
+      Every week, vePENDLE holders vote to direct PENDLE token emissions to specific liquidity pools.
+      Pools that receive more votes get more PENDLE rewards — attracting more LP capital.
+      This creates a competitive market where protocols offer incentives ("bribes") to vePENDLE
+      voters. The model is identical in structure to Curve's gauge system.
+      Bribe tracking at
+      <a href="https://hiddenhand.finance/pendle" target="_blank" rel="noopener nofollow" class="src">Hidden Hand</a>.
+    </p>
+
+    <div class="grid-2">
+      <div class="mini">
+        <h3>How gauge voting works in practice</h3>
+        <p class="muted">
+          Each week, you allocate your vePENDLE votes across pools on the Pendle governance interface.
+          Pools with more votes receive a larger proportion of that week's PENDLE emissions budget.
+          Your votes carry a weight proportional to your current vePENDLE balance (which decays
+          each week — so regularly extend your lock to maintain voting power).
+        </p>
+        <div class="kpi-badges"><span>Weekly epochs</span><span>Proportional to vePENDLE</span><span>Votes decay with vePENDLE</span></div>
+      </div>
+      <div class="mini">
+        <h3>Earning bribe income from votes</h3>
+        <p class="muted">
+          Protocols wanting emissions for their pool offer bribes — additional rewards in their
+          native token — to vePENDLE voters who vote for their pool. The effective yield from
+          bribing depends on the bribe amount offered relative to vePENDLE voted.
+          Some meta-governance platforms (Magpie, Penpie, StakeDAO) aggregate voting and
+          automatically optimise for maximum bribe income.
+        </p>
+        <div class="kpi-badges"><span>Paid in pool tokens</span><span>Optimise via Magpie/Penpie</span><span>Best for large vePENDLE</span></div>
+      </div>
+    </div>
+
+    <div class="note">
+      <strong>Gauge voting is optional:</strong> You earn protocol fees from vePENDLE regardless
+      of whether you vote gauges — fees are distributed to all vePENDLE holders proportionally.
+      Gauge voting adds bribe income on top, but requires weekly attention. For smaller vePENDLE
+      positions, the bribe income may not justify the time investment — consider delegating
+      to a meta-governance platform.
+    </div>
+  </section>
+
+  <section class="card" id="lp-boosting">
+    <h2>LP Boosting: How vePENDLE Multiplies Liquidity Rewards</h2>
+    <p>
+      vePENDLE holders who also provide liquidity to Pendle's AMM pools receive a boosted
+      PENDLE emission rate on their LP position — up to 2.5× the base rate.
+      This creates an incentive to both lock PENDLE and provide liquidity simultaneously —
+      similar to Curve's boosting model. Mechanics detailed at
+      <a href="https://docs.pendle.finance/ProtocolMechanics/vePENDLE#lp-boost" target="_blank" rel="noopener nofollow" class="src">docs.pendle.finance — LP Boost</a>.
+    </p>
+
+    <div class="callout-grid">
+      <div class="mini">
+        <h3>How the boost is calculated</h3>
+        <p class="muted">
+          Your LP boost multiplier depends on your vePENDLE balance relative to the pool's
+          total vePENDLE weight. The boost is calculated per-pool, per-epoch.
+          Maximum boost (2.5×) requires having vePENDLE proportional to your share of the
+          pool's total liquidity. This makes boosting most capital-efficient for large
+          LP positions with substantial vePENDLE backing.
+        </p>
+        <div class="kpi-badges"><span>Up to 2.5× LP rewards</span><span>Per-pool calculation</span><span>Proportional to liquidity share</span></div>
+      </div>
+      <div class="mini">
+        <h3>Combined strategy: vePENDLE + LP</h3>
+        <p class="muted">
+          The highest-yield Pendle configuration combines: locked PENDLE (earning protocol fees
+          and bribes via vePENDLE) + LP position in a high-volume pool (earning boosted PENDLE
+          emissions + swap fees). This stacks multiple yield sources but also stacks multiple
+          risk layers: lock illiquidity, smart contract risk, and LP impermanent loss.
+        </p>
+        <div class="kpi-badges"><span>Stacked yield</span><span>Stacked risk</span><span>Capital intensive</span></div>
+      </div>
+    </div>
+
+    <div class="note">
+      <strong>Practical note on LP + vePENDLE combination:</strong> The combined strategy is the
+      most yield-optimised approach in Pendle but requires significant capital in both PENDLE
+      (for vePENDLE lock) and the underlying assets (for LP position). For most users,
+      focusing on either vePENDLE (for simplicity and protocol fee income) or LP (for yield
+      exposure) separately is more manageable than attempting to optimise both simultaneously.
+    </div>
+  </section>
+
+  <section class="card" id="review">
+    <h2>Legitimacy, Trust Signals, and What to Watch (2025–2026)</h2>
+    <p>
+      Pendle is a production DeFi protocol with a multi-year track record and multiple
+      security audits. Independent risk analysis is available from
+      <a href="https://www.gauntlet.xyz/" target="_blank" rel="noopener nofollow" class="src">Gauntlet</a>
+      and community-driven analysis at
+      <a href="https://llama.risk/pendle" target="_blank" rel="noopener nofollow" class="src">LlamaRisk — Pendle</a>.
+    </p>
+
+    <div class="callout-grid">
+      <div class="mini">
+        <h3>Protocol legitimacy signals</h3>
+        <p class="muted">
+          Multiple published independent security audits (Ackee, Dedaub — available at Pendle GitHub).
+          Multi-year mainnet operation with growing TVL and audited expanding chain deployments.
+          Transparent team with identifiable founders and active community communication.
+          Revenue data publicly accessible on-chain and via the official dashboard.
+          Active governance with documented vePENDLE voting history.
+        </p>
+      </div>
+      <div class="mini">
+        <h3>Red flags and active threats</h3>
+        <p class="muted">
+          Phishing sites mimicking app.pendle.finance are the primary threat — always navigate
+          via bookmarked URL. Fake "PENDLE staking" offers on social media promising
+          guaranteed yields significantly above current protocol rates.
+          Unapproved fork protocols replicating Pendle's branding without security audits.
+          "Pendle yield optimiser" tools requesting wallet permissions beyond the standard approvals.
+        </p>
+      </div>
+    </div>
+
+    <div class="note">
+      <strong>2025/2026 context:</strong> Pendle has grown significantly since its 2021 launch,
+      now one of the largest DeFi yield protocols by TVL. Its expansion across Arbitrum,
+      BNB Chain, and other chains has introduced additional deployment-level smart contract risk.
+      Always verify that you are interacting with the official Pendle deployment address
+      on each chain — cross-chain deployments have been a phishing target.
+      Official contract addresses at
+      <a href="https://docs.pendle.finance/Developers/Deployments/Ethereum" target="_blank" rel="noopener nofollow" class="src">docs.pendle.finance — Deployments</a>.
+    </div>
+  </section>
+
+  <section class="card" id="safety">
+    <h2>Risks: Lock-Up, Smart Contract, and Market Risks</h2>
+    <p>
+      Pendle's risk profile is distinct from PoS staking — there is no slashing,
+      but the DeFi-native risks (smart contract exploits, lock illiquidity, yield market risk)
+      are significant and deserve careful evaluation.
+    </p>
+
+    <table aria-label="Pendle / vePENDLE risk factors">
+      <thead>
+        <tr><th>Risk</th><th>Impact</th><th>Mitigation</th></tr>
+      </thead>
+      <tbody>
+        <tr class="highlight">
+          <td>Smart contract exploit</td>
+          <td class="err">Partial or total principal loss — most severe DeFi risk</td>
+          <td>Use only the official contract addresses; verify audits at Pendle GitHub; do not exceed personal risk limit</td>
+        </tr>
+        <tr>
+          <td>vePENDLE lock illiquidity</td>
+          <td class="warn">PENDLE inaccessible for entire lock duration — no early exit</td>
+          <td>Only lock PENDLE you will not need for the entire chosen duration; model liquidity needs honestly</td>
+        </tr>
+        <tr class="highlight">
+          <td>PENDLE price depreciation</td>
+          <td class="warn">USD value of locked PENDLE declines while illiquid</td>
+          <td>Protocol fees are paid in multiple tokens — partially hedges PENDLE price risk on income side, not on principal</td>
+        </tr>
+        <tr>
+          <td>Protocol fee revenue decline</td>
+          <td class="warn">vePENDLE APY declines if trading volume drops</td>
+          <td>Monitor weekly fee revenue on dashboard; fee income is directly correlated with DeFi market activity</td>
+        </tr>
+        <tr class="highlight">
+          <td>YT value decay to zero</td>
+          <td class="err">YT reaches zero at maturity regardless of price — 100% loss possible</td>
+          <td>Understand that YT is a leveraged yield bet, not a principal-preserving instrument</td>
+        </tr>
+        <tr>
+          <td>Underlying asset risk (PT/YT)</td>
+          <td class="err">If the underlying yield-bearing asset fails (e.g. stETH exploit), PT and YT are both affected</td>
+          <td>Evaluate the underlying asset's own risk profile before buying PT or YT on top of it</td>
+        </tr>
+        <tr class="highlight">
+          <td>LP impermanent loss</td>
+          <td class="warn">If PT price diverges significantly from underlying, LP loses relative to holding</td>
+          <td>Understand Pendle's AMM mechanics before providing LP; impermanent loss behaves differently to standard AMMs</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="note">
+      <strong>Risk summary for vePENDLE specifically:</strong> The primary risks are smart contract
+      exploit (mitigated by using audited official contracts) and lock illiquidity (mitigated by
+      not locking more than you can afford to have illiquid). There is no slashing, no unbonding
+      period complexity, and no validator selection to manage. The complexity is in understanding
+      the fee revenue model and PENDLE price risk during the lock period.
+    </div>
+  </section>
+
+  <section class="card" id="comparison">
+    <h2>Comparison: vePENDLE vs PT vs YT vs LP — Four Distinct Strategies</h2>
+    <p>
+      Pendle offers four fundamentally different yield strategies, each serving a distinct
+      financial objective. Choosing the right one requires clarity on your goal.
+    </p>
+
+    <table aria-label="Pendle strategies comparison">
+      <thead>
+        <tr><th>Strategy</th><th>Goal</th><th>Yield type</th><th>Liquidity</th><th>Primary risk</th></tr>
+      </thead>
+      <tbody>
+        <tr class="highlight">
+          <td><strong>vePENDLE</strong></td>
+          <td>Earn protocol fees + governance</td>
+          <td><span class="yield-badge yield-variable">Variable</span></td>
+          <td class="err">Fully locked — no exit</td>
+          <td>Smart contract; PENDLE price; revenue variability</td>
+        </tr>
+        <tr>
+          <td><strong>PT</strong></td>
+          <td>Lock in fixed yield on an asset</td>
+          <td><span class="yield-badge yield-fixed">Fixed</span></td>
+          <td class="ok">Tradeable on secondary market before maturity</td>
+          <td>Underlying asset risk; opportunity cost if rates rise</td>
+        </tr>
+        <tr class="highlight">
+          <td><strong>YT</strong></td>
+          <td>Amplified exposure to rising yields</td>
+          <td><span class="yield-badge yield-variable">Variable</span></td>
+          <td class="ok">Tradeable on secondary market</td>
+          <td>Decays to zero at maturity — can lose 100%</td>
+        </tr>
+        <tr>
+          <td><strong>LP</strong></td>
+          <td>Earn trading fees + PENDLE emissions</td>
+          <td><span class="yield-badge yield-variable">Variable</span></td>
+          <td class="ok">Withdrawable any time</td>
+          <td>Impermanent loss; smart contract; emissions reduction</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="note">
+      <strong>Strategy selection rule:</strong> For straightforward exposure to Pendle's protocol
+      success, vePENDLE is the right instrument — lock PENDLE, earn fees, vote gauges.
+      For fixed income on a DeFi yield-bearing asset, buy PT on a trusted underlying.
+      For yield speculation, YT — but only with capital you can afford to lose entirely.
+      LP is best suited for users who want yield + PENDLE exposure without a lock-up commitment.
+    </div>
+  </section>
+
+  <section class="card" id="best-practices">
+    <h2>Best Practices: High-Impact Operational Rules for Pendle</h2>
+    <ul>
+      <li><strong>Navigate to app.pendle.finance via bookmark only:</strong> Pendle phishing clones are actively deployed. Never click links in DMs, Telegram, or Discord to access Pendle. Verify the URL matches exactly before connecting a wallet.</li>
+      <li><strong>Verify official contract addresses before any interaction:</strong> especially on non-Ethereum chains where multiple unofficial forks exist. Official deployment addresses are at docs.pendle.finance — verify every new chain deployment against this documentation.</li>
+      <li><strong>Model the full lock duration before locking:</strong> ask yourself — could I need this PENDLE for any purpose in the next N months/years? If yes, do not lock for that duration. Early exit is impossible — there is no emergency unlock mechanism.</li>
+      <li><strong>Treat YT as a speculative position, not a yield position:</strong> YT decays to zero at maturity regardless of price. Never size a YT position as a "yield enhancement" on capital you need preserved — it is a directional bet on yield rates, not a savings instrument.</li>
+      <li><strong>Use exact token approvals, not unlimited:</strong> when approving PENDLE for locking or any other Pendle interaction, set an exact amount. Revoke unused approvals at <a href="https://revoke.cash/" target="_blank" rel="noopener nofollow" class="src">revoke.cash</a>.</li>
+      <li><strong>Vote gauges weekly or delegate to a meta-governance platform:</strong> uncasted votes earn no bribe income. If active weekly voting is too burdensome, consider locking via Pendle Magpie or Penpie which aggregate voting and distribute bribe income automatically.</li>
+      <li><strong>Monitor protocol fee revenue trends:</strong> if Pendle's TVL and trading volume are declining over multiple months, the vePENDLE yield thesis is weakening. Evaluate whether extending your lock makes sense given the revenue trajectory.</li>
+      <li><strong>Evaluate underlying assets independently for PT/YT positions:</strong> PT and YT inherit the risks of the underlying yield-bearing asset. A PT on a poorly audited or centrally controlled underlying carries that asset's risk on top of Pendle's smart contract risk.</li>
+    </ul>
+
+    <div class="note">
+      <strong>Most common Pendle mistake:</strong> Locking PENDLE for the maximum duration to
+      maximise vePENDLE without accounting for PENDLE's price volatility during the lock.
+      If PENDLE falls 70% during a 2-year lock, the protocol fee income (typically 10–30% APY)
+      does not compensate for the principal loss. Balance lock duration ambition against
+      realistic PENDLE price scenario modelling.
+    </div>
+  </section>
+
+  <section class="card" id="troubleshooting">
+    <h2>Troubleshooting: Common Issues, Root Causes, and Fixes</h2>
+
+    <h3>"I cannot unlock my PENDLE before the lock expires"</h3>
+    <ul>
+      <li>This is by design — vePENDLE has no early exit mechanism. Your PENDLE will be returned automatically when the lock expires at the date specified at the time of locking.</li>
+      <li>If you need liquidity urgently, your only option is to find other sources. This is why modelling liquidity needs before locking is critical — treat locked PENDLE as completely illiquid for the duration.</li>
+    </ul>
+
+    <h3>"My vePENDLE balance is lower than expected"</h3>
+    <ul>
+      <li>vePENDLE decays linearly — your balance decreases every second toward zero at lock expiry. This is expected behaviour. The current vePENDLE balance shown is your real-time decayed amount, not your initial lock amount.</li>
+      <li>To restore your vePENDLE balance: extend your lock duration (to the maximum 2 years from today) or add more PENDLE to your existing lock. Both actions increase vePENDLE.</li>
+    </ul>
+
+    <h3>"My PT has not redeemed even though maturity has passed"</h3>
+    <ul>
+      <li>After maturity, PT can be redeemed for the underlying asset. Navigate to app.pendle.finance, find your expired PT position, and submit the redeem transaction. Redemption is not automatic — you must initiate it.</li>
+      <li>Ensure you have sufficient ETH (or the chain's native gas token) to pay for the redemption transaction fee.</li>
+    </ul>
+
+    <h3>"My YT shows zero value but maturity hasn't passed yet"</h3>
+    <ul>
+      <li>YT value is driven by the implied yield of the underlying asset. If the underlying asset's yield has dropped significantly, the YT's present value approaches zero even before maturity — because the remaining expected yield is minimal.</li>
+      <li>This is not an error — it reflects the market's current estimate of remaining yield income from the underlying asset until maturity. YT can recover value if yields increase again before expiry.</li>
+    </ul>
+
+    <h3>"I voted on gauges but did not receive bribe income"</h3>
+    <ul>
+      <li>Bribe income is distributed after the gauge voting epoch closes and the emissions have been allocated. There is typically a delay of several days after voting before bribe income is claimable.</li>
+      <li>Verify you voted for a pool that had active bribe offers — not all pools attract bribers every epoch. Check the bribe market on Hidden Hand or Votemarket before voting to confirm active offers.</li>
+    </ul>
+
+    <div class="note">
+      <strong>Best resource for Pendle issues:</strong> The official
+      <a href="https://pendle.finance/" target="_blank" rel="noopener nofollow" class="src">Pendle Discord</a>
+      and
+      <a href="https://docs.pendle.finance/" target="_blank" rel="noopener nofollow" class="src">documentation</a>
+      are the most reliable support channels. Verify any support advice against official documentation
+      before executing any transactions — "support" accounts in Discord and Telegram are a common
+      phishing vector.
+    </div>
+  </section>
+
+  <section class="eeat" id="eeat" aria-labelledby="eeat-title">
+    <h2 id="eeat-title">Authoritative Notes &amp; External References</h2>
+    <p>
+      Primary sources used throughout this guide. All links point to official Pendle Finance
+      documentation, governance tooling, independent audit resources, or established
+      DeFi risk analysis platforms.
+    </p>
+
+    <div class="grid-2">
+      <div>
+        <h3>Official Protocol Docs &amp; Tools</h3>
+        <ul>
+          <li><a href="https://pendle.finance/" target="_blank" rel="noopener nofollow">Pendle.finance — Official Protocol Site</a></li>
+          <li><a href="https://docs.pendle.finance/" target="_blank" rel="noopener nofollow">Docs.pendle.finance — Protocol Documentation</a></li>
+          <li><a href="https://docs.pendle.finance/ProtocolMechanics/vePENDLE" target="_blank" rel="noopener nofollow">Pendle Docs — vePENDLE Mechanics</a></li>
+          <li><a href="https://docs.pendle.finance/Introduction/YieldTokenization" target="_blank" rel="noopener nofollow">Pendle Docs — PT/YT Yield Tokenization</a></li>
+          <li><a href="https://github.com/pendle-finance/pendle-core-v2-public/tree/main/audits" target="_blank" rel="noopener nofollow">Pendle GitHub — Security Audit Reports</a></li>
+        </ul>
+      </div>
+      <div>
+        <h3>Governance, Bribes &amp; Risk Analysis</h3>
+        <ul>
+          <li><a href="https://hiddenhand.finance/pendle" target="_blank" rel="noopener nofollow">Hidden Hand — Pendle Gauge Bribe Market</a></li>
+          <li><a href="https://votemarket.pastis.finance/" target="_blank" rel="noopener nofollow">Votemarket — vePENDLE Bribe Tracking</a></li>
+          <li><a href="https://pendle.magpiexyz.io/" target="_blank" rel="noopener nofollow">Pendle Magpie — Meta-Governance Optimiser</a></li>
+          <li><a href="https://llama.risk/pendle" target="_blank" rel="noopener nofollow">LlamaRisk — Independent Pendle Risk Analysis</a></li>
+          <li><a href="https://revoke.cash/" target="_blank" rel="noopener nofollow">Revoke.cash — Token Allowance Management</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="note" style="margin-top:1rem;">
+      <strong>About:</strong> Prepared by Crypto Finance Experts as a practical SEO-oriented knowledge base covering
+      Pendle staking: vePENDLE locking mechanics, linear decay model, PT/YT yield tokenization,
+      gauge voting and bribe markets, LP boosting, APY/APR comparison across Pendle positions,
+      smart contract and lock-up risks, and troubleshooting.
+    </div>
+  </section>
+
+  <section class="card faq-section" aria-labelledby="faq">
+    <h2 id="faq">Pendle Staking: Frequently Asked Questions</h2>
+
+    <div class="faq-item">
+      <button class="faq-button" aria-expanded="false" aria-controls="f1" id="b1">
+        <h3>What is Pendle staking and how does it differ from PoS staking?</h3><span class="faq-plus">+</span>
+      </button>
+      <div id="f1" class="faq-content" role="region" aria-labelledby="b1">
+        <p>Pendle "staking" refers to locking PENDLE tokens to receive vePENDLE — a governance and fee-sharing position, not a validator staking position. There is no proof-of-stake consensus involved. vePENDLE earns a share of Pendle's protocol fees (from yield trading activity), bribe income from gauge voting, and boosted LP rewards. It is conceptually similar to Curve's veCRV model — a vote-escrow DeFi fee distribution mechanism, not a blockchain security mechanism.</p>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-button" aria-expanded="false" aria-controls="f2" id="b2">
+        <h3>What are PT and YT in Pendle?</h3><span class="faq-plus">+</span>
+      </button>
+      <div id="f2" class="faq-content" role="region" aria-labelledby="b2">
+        <p>PT (Principal Token) and YT (Yield Token) are the two components that result from splitting a yield-bearing asset in Pendle. PT represents the principal — it trades at a discount before maturity and redeems for exactly 1 underlying asset at maturity, giving the buyer a guaranteed fixed yield. YT receives all of the yield generated by the underlying asset from purchase until maturity — it is a leveraged bet on yield rates going up and decays to zero at maturity regardless of performance.</p>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-button" aria-expanded="false" aria-controls="f3" id="b3">
+        <h3>What APY can I earn from vePENDLE?</h3><span class="faq-plus">+</span>
+      </button>
+      <div id="f3" class="faq-content" role="region" aria-labelledby="b3">
+        <p>vePENDLE APY is variable and depends on Pendle's protocol fee revenue (correlated with TVL and trading volume) and bribe income. Estimated APY is displayed on app.pendle.finance/vependle — it has historically ranged from 10–40%+ during high-activity periods. These figures are paid in multiple tokens (stETH, USDC, PENDLE, and others from active pools), not purely in PENDLE. Check current rates directly on the dashboard — do not rely on historical figures for a protocol with variable DeFi revenue.</p>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-button" aria-expanded="false" aria-controls="f4" id="b4">
+        <h3>Can I unlock my PENDLE before the lock expires?</h3><span class="faq-plus">+</span>
+      </button>
+      <div id="f4" class="faq-content" role="region" aria-labelledby="b4">
+        <p>No — there is no early exit mechanism for vePENDLE. Once PENDLE is locked, it is completely illiquid until the lock expiry date. Your PENDLE is returned automatically at lock expiry. This is the most critical operational characteristic of vePENDLE — it is a genuine lock-up, not a soft commitment. Only lock PENDLE you are confident you will not need for the entire chosen duration. There is no emergency exit.</p>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-button" aria-expanded="false" aria-controls="f5" id="b5">
+        <h3>What is gauge voting and how does it generate additional income?</h3><span class="faq-plus">+</span>
+      </button>
+      <div id="f5" class="faq-content" role="region" aria-labelledby="b5">
+        <p>Gauge voting is the weekly process by which vePENDLE holders direct PENDLE emission incentives to specific liquidity pools. Protocols wanting their pool to receive more PENDLE emissions offer bribes — additional token incentives — to vePENDLE voters who support their pool. vePENDLE holders can earn bribe income by voting strategically for the highest-bribe pools each week. Bribe income is variable and depends on competition — track active offers on Hidden Hand or Votemarket before each epoch's voting deadline.</p>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-button" aria-expanded="false" aria-controls="f6" id="b6">
+        <h3>What is the difference between buying PT and just holding the underlying asset?</h3><span class="faq-plus">+</span>
+      </button>
+      <div id="f6" class="faq-content" role="region" aria-labelledby="b6">
+        <p>When you buy PT instead of holding the underlying yield-bearing asset, you give up the variable yield the underlying generates in exchange for a guaranteed fixed return at maturity. For example: buying PT-stETH at a 5% fixed APY means you receive exactly 5% regardless of whether actual stETH yields go to 2% or 10% during the period. This is the interest rate bear position — you benefit if yields fall below your locked rate and you miss out if yields significantly exceed it.</p>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-button" aria-expanded="false" aria-controls="f7" id="b7">
+        <h3>Is Pendle safe to use? Has it been audited?</h3><span class="faq-plus">+</span>
+      </button>
+      <div id="f7" class="faq-content" role="region" aria-labelledby="b7">
+        <p>Pendle's core contracts have been audited by multiple independent security firms including Ackee and Dedaub — audit reports are publicly available at Pendle's GitHub repository. Pendle has been in production since 2021 with growing TVL across multiple chains. However, "audited" does not mean "exploit-proof" — smart contract risk exists for all DeFi protocols regardless of audit status. Use the official contract addresses (verified at docs.pendle.finance), do not exceed your personal risk tolerance, and understand that a smart contract exploit is the highest-severity risk for any principal deployed on Pendle.</p>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-button" aria-expanded="false" aria-controls="f8" id="b8">
+        <h3>What happens to my vePENDLE when it decays to zero?</h3><span class="faq-plus">+</span>
+      </button>
+      <div id="f8" class="faq-content" role="region" aria-labelledby="b8">
+        <p>When your lock expires and vePENDLE reaches zero, your underlying PENDLE tokens are returned to your wallet automatically — no additional transaction is required. You stop earning protocol fees and lose voting power at the moment of expiry. If you want to continue earning vePENDLE rewards, you must initiate a new lock. To avoid the income gap: extend your lock before it expires, or set a calendar reminder to re-lock at expiry.</p>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-button" aria-expanded="false" aria-controls="f9" id="b9">
+        <h3>Should I lock PENDLE for vePENDLE or provide LP instead?</h3><span class="faq-plus">+</span>
+      </button>
+      <div id="f9" class="faq-content" role="region" aria-labelledby="b9">
+        <p>Both earn yield from Pendle, but with different risk/liquidity profiles. vePENDLE earns protocol fees and bribe income — fully illiquid for the lock duration, but no impermanent loss. LP earns swap fees and PENDLE emissions — withdrawable any time, but subject to impermanent loss in the PT/underlying price relationship and PENDLE emission reductions. For users who want maximum liquidity flexibility, LP is better. For users who are long-term PENDLE bulls and want to earn protocol revenue from Pendle's success, vePENDLE is better. The optimal approach for maximum yield combines both — but requires more capital and complexity.</p>
+      </div>
+    </div>
+
+  </section>
+
+</main>
+
+<footer class="container" role="contentinfo" style="padding:2rem 0;border-top:1px solid var(--line);margin-top:2rem">
+  <p class="muted">© 2026 Pendle Staking Guide. Educational content with safety-first operational focus. Not financial or investment advice.</p>
+</footer>
+
+<script>
+  document.querySelectorAll('.faq-button').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const open = btn.getAttribute('aria-expanded') === 'true';
+      const body = document.getElementById(btn.getAttribute('aria-controls'));
+      btn.setAttribute('aria-expanded', String(!open));
+      btn.querySelector('.faq-plus').textContent = open ? '+' : '−';
+      body.style.maxHeight = open ? '0' : body.scrollHeight + 'px';
+      body.classList.toggle('open', !open);
+    });
+  });
+</script>
+
+</body>
+</html>
