@@ -1,0 +1,107 @@
+{
+ "keyword": "pendle staking",
+ "h1": "Pendle Staking",
+ "brand": "Pendle",
+ "niche": "stake",
+ "verb": "Stake",
+ "title": "Pendle Staking - Open App",
+ "meta_description": "pendle staking opens the official Pendle app to stake PENDLE as sPENDLE, review rewards, vote, or start unstaking from one dashboard.",
+ "palette": {
+  "mode": "dark",
+  "bg": "#090D18",
+  "accent": "#1BE3C2",
+  "ink": "#FFFFFF"
+ },
+ "hero_h2": "Convert PENDLE into sPENDLE governance power",
+ "hero_lead": "pendle staking routes you to the official Pendle V2 app to stake PENDLE into sPENDLE, manage active participation, claim eligible rewards, and review unstaking choices.",
+ "badge": "Ethereum",
+ "widget": {
+  "from": "PENDLE",
+  "from_net": "Ethereum",
+  "to": "sPENDLE",
+  "to_net": "Ethereum",
+  "action": "Open Pendle App"
+ },
+ "trust": [
+  "Official V2 app",
+  "1:1 sPENDLE mint",
+  "14-day unstake option"
+ ],
+ "what_is": "Pendle is a DeFi yield-trading protocol; its sPENDLE module lets users stake PENDLE 1:1 for governance power and eligible reward distributions, as described in the <a href=\"https://docs.pendle.finance/pendle-v2/ProtocolMechanics/Mechanisms/sPENDLE\">official sPENDLE docs</a>.",
+ "how": [
+  {
+   "t": "Open the app",
+   "d": "Use the official Pendle V2 route and confirm the domain is app.pendle.finance before connecting a wallet."
+  },
+  {
+   "t": "Connect wallet",
+   "d": "Connect the wallet holding PENDLE on Ethereum and review token approvals before signing."
+  },
+  {
+   "t": "Stake PENDLE",
+   "d": "Enter the amount, approve if needed, and confirm the transaction to receive sPENDLE at a 1:1 ratio."
+  },
+  {
+   "t": "Manage position",
+   "d": "Use the dashboard to vote when required, claim eligible rewards, or unstake through the standard withdrawal period or instant fee option."
+  }
+ ],
+ "points": [
+  {
+   "h": "Built for sPENDLE",
+   "p": "Pendle’s current staking flow centers on sPENDLE, while vePENDLE is legacy and being phased out in favor of the newer governance and reward token model."
+  },
+  {
+   "h": "Active participation matters",
+   "p": "Reward eligibility depends on the rules in each epoch, including participation when a Pendle Protocol Proposal is available; the app is the source for current status."
+  },
+  {
+   "h": "Clear exit paths",
+   "p": "sPENDLE can be unstaked back to PENDLE after a 14-day withdrawal period, or immediately with the fee described in the official documentation."
+  }
+ ],
+ "eeat": [
+  {
+   "text": "Pendle sPENDLE docs",
+   "url": "https://docs.pendle.finance/pendle-v2/ProtocolMechanics/Mechanisms/sPENDLE"
+  },
+  {
+   "text": "Official Pendle app",
+   "url": "https://app.pendle.finance/spendle/stake/in"
+  },
+  {
+   "text": "sPENDLE contract",
+   "url": "https://etherscan.io/address/0x999999999991E178D52Cd95AFd4b00d066664144"
+  }
+ ],
+ "faq": [
+  {
+   "q": "What is pendle staking?",
+   "a": "pendle staking is the process of staking PENDLE into sPENDLE through the official Pendle app for governance participation and eligible reward distributions.",
+   "open": true
+  },
+  {
+   "q": "Where do I start pendle staking?",
+   "a": "Start only from <a href=\"https://app.pendle.finance/spendle/stake/in\">app.pendle.finance</a>, then verify the connected network, token approval, and transaction details before signing.",
+   "open": false
+  },
+  {
+   "q": "Does pendle staking have a lock?",
+   "a": "The sPENDLE docs state that standard unstaking returns PENDLE 1:1 after a 14-day withdrawal period, with an immediate unstake option that carries a 5% fee.",
+   "open": false
+  },
+  {
+   "q": "How are pendle staking rewards handled?",
+   "a": "Pendle allocates a portion of V2 fees to PENDLE buybacks, and eligible active sPENDLE holders may claim distributions through the dApp; no fixed APY is guaranteed here.",
+   "open": false
+  },
+  {
+   "q": "Is pendle staking the same as vePENDLE?",
+   "a": "No. vePENDLE is legacy in the current documentation, while sPENDLE is the active staking, governance, and reward model users are directed toward.",
+   "open": false
+  }
+ ],
+ "official_url": "https://app.pendle.finance/spendle/stake/in",
+ "official_domain": "app.pendle.finance",
+ "footer_note": "Not the official app; verify app.pendle.finance before connecting. Educational content only, not financial advice."
+}
