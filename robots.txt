@@ -1,4 +1,3 @@
 User-agent: *
 Allow: /
-
 Sitemap: https://pendle-staking.github.io/sitemap.xml
