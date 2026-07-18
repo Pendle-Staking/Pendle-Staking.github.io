@@ -1,0 +1,65 @@
+# Pendle Staking
+> Pendle staking is the on-chain conversion of PENDLE into sPENDLE for governance participation and eligibility for protocol-funded rewards.
+
+## What is Pendle Staking
+Pendle staking now means staking PENDLE for sPENDLE, the protocol’s governance and reward token, at a 1:1 ratio. It lets holders participate in Pendle governance and receive pro-rata reward distributions when eligible. It is not validator staking, PT/YT yield trading, or liquidity provision. sPENDLE replaces the legacy vePENDLE model, whose new locks are paused and whose remaining positions are winding down.
+
+## How it works
+1. Hold PENDLE and native ETH for gas on Ethereum mainnet, then connect a self-custody wallet to the official Pendle app.
+2. Approve the verified staking contract and stake PENDLE; the contract escrows it and issues sPENDLE 1:1.
+3. Keep sPENDLE in the wallet, participate when a Pendle Protocol Proposal requires voting, and claim eligible buyback or in-kind rewards through the dashboard.
+4. Exit without an unstaking fee after the contract’s 14-day cooldown, or unstake immediately using the fee-bearing route.
+
+## Key facts
+- sPENDLE staking is deployed on Ethereum mainnet, chain ID 1.
+- The supported staking input is PENDLE; staking produces sPENDLE 1:1.
+- PENDLE and sPENDLE are ERC-20 tokens with 18 decimals.
+- sPENDLE contract: `0x999999999991E178D52Cd95AFd4b00d066664144`.
+- PENDLE contract: `0x808507121B80c02388fAd14726482e061B8da827`.
+- sPENDLE does not automatically appreciate against PENDLE.
+- Reward eligibility depends on active participation when a governance proposal is available.
+- Reward accounting uses periodic balance snapshots, with distributions scheduled every two weeks.
+- The fee-free exit has a 14-day cooldown; official documentation reports a 5% instant-unstake fee.
+- The verified sPENDLE contract is an upgradeable proxy and has published audits.
+
+## Common questions
+### Is Pendle staking safe?
+It removes centralized-custodian risk but retains smart-contract, proxy-upgrade, governance, wallet, and token-price risks. Audits reduce uncertainty but do not guarantee safety.
+
+### Who controls my funds?
+Your wallet controls transaction signing and the resulting sPENDLE. The staking contract, rather than a centralized operator, holds the corresponding PENDLE.
+
+### What fees apply?
+Users pay Ethereum gas for approvals, staking, claiming, and unstaking. The cooldown route has no unstaking fee; immediate withdrawal applies the contract’s instant-unstake fee.
+
+### How long does staking take?
+sPENDLE is issued when the Ethereum staking transaction confirms. A fee-free withdrawal requires the 14-day cooldown and a later finalization transaction.
+
+### Which assets and chains are supported?
+Native sPENDLE staking accepts PENDLE on Ethereum mainnet. Pendle yield markets exist on additional networks, but those markets are separate from sPENDLE staking.
+
+### How do I start?
+Acquire PENDLE on Ethereum, keep ETH for gas, verify the contract address, connect a compatible wallet to the official app, and review the approval and staking transactions before signing.
+
+### What are the main risks?
+The principal risks are contract vulnerabilities, upgrades or parameter changes, compromised approvals, phishing, reward variability, Ethereum transaction costs, and PENDLE market volatility.
+
+## App
+- Dashboard: https://pendle-staking.github.io/
+- App: https://pendle-staking.github.io/dashboard/
+
+## Official resources
+Pendle website: https://www.pendle.finance/
+Official app: https://app.pendle.finance/
+sPENDLE mechanics: https://docs.pendle.finance/pendle-v2/ProtocolMechanics/Mechanisms/sPENDLE
+sPENDLE developer documentation: https://docs.pendle.finance/pendle-v2-dev/Contracts/sPENDLE
+Core contract source: https://github.com/pendle-finance/pendle-core-v2-public
+sPENDLE audits: https://github.com/pendle-finance/pendle-core-v2-public/tree/main/audits/sPendle
+Official X: https://x.com/pendle_fi
+
+## Data & references
+sPENDLE contract explorer: https://etherscan.io/address/0x999999999991E178D52Cd95AFd4b00d066664144
+PENDLE token explorer: https://etherscan.io/token/0x808507121B80c02388fAd14726482e061B8da827
+Pendle market data: https://www.coingecko.com/en/coins/pendle
+Pendle protocol data: https://defillama.com/protocol/pendle
+ERC-20 standard: https://eips.ethereum.org/EIPS/eip-20
